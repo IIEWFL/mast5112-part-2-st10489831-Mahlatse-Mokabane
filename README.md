@@ -3,8 +3,8 @@
 <strong>Project Overview</strong>
 A React Native mobile application that lets users browse a restaurant's menu.  It is viewed from two angles:
 <ul>
-  <li><strong>Guest:</strong>Can view the menu and place orders.</li>
-  <li><strong>Chef:</strong>Can manage manage the menu such as add, edit and remove items.</li>
+  <li><strong>Guest: </strong> Can view the menu and place orders.</li>
+  <li><strong>Chef: </strong> Can manage manage the menu such as add, edit and remove items.</li>
 </ul>
 The app is designed to be visually appealing, and user-friendly.
 
