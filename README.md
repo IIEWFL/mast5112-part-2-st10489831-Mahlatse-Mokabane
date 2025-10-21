@@ -1,1 +1,26 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/cBRPQS2M)
+<strong> Christoffel's Menu App</strong>
+
+<strong>Project Overview</strong>
+A React Native mobile application that lets users browse a restaurant's menu.  It is viewed from two angles:
+<ul>
+  <li><strong>Guest: </strong> Can view the menu and place orders.</li>
+  <li><strong>Chef: </strong> Can manage manage the menu such as add, edit and remove items.</li>
+</ul>
+The app is designed to be visually appealing, and user-friendly.
+
+<strong>Features</strong>
+<ul>
+  <li>User authentication for Guest and Chef roles.</li>
+  <li>Dynamic menu display (starters, sides, drinks, and main courses)</li>
+  <li><strong>Chef can:</strong> </li>
+  <li>Add new menu items with images.</li>
+  <li>Edit existing items.</li>
+  <li>Remove menu items.</li>
+
+  <li><strong>Guest can:</strong> </li>
+  <li>View the menu.</li>
+  <li>Filter functionality for easy navigation.</li>
+  <li>Responsive design for different mobile screens.</li>
+</ul>
+
+
