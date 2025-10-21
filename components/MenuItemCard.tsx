@@ -1,35 +1,50 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { MenuItem } from '../types';
 
-interface Props {
-  item: MenuItem;
-}
-
-export default function MenuItemCard({ item }: Props) {
+export default function MenuItemCard({ item }: { item: MenuItem }) {
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>{item.name}</Text>
-      <Text style={styles.description}>{item.description}</Text>
-      <Text style={styles.price}>R{item.price}</Text>
-      <Text style={styles.course}>{item.course}</Text>
+      {item.image && (
+        <Image source={{ uri: item.image }} style={styles.image} />
+      )}
+      <View style={styles.textContainer}>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.desc}>{item.desc}</Text>
+        <Text style={styles.price}>R{item.price}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: 'rgba(0, 0, 0, 0.6)', // dark semi-transparent overlay
+    flexDirection: 'row',
+    backgroundColor: '#fff',
     borderRadius: 12,
-    padding: 14,
+    padding: 10,
     marginVertical: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
+    alignItems: 'center',
   },
-  title: { fontWeight: 'bold', fontSize: 18, color: 'white' },
-  description: { marginVertical: 4, color: 'white', fontSize: 14 },
-  price: { fontWeight: 'bold', color: '#FFD700', marginTop: 4 }, // golden price
-  course: { color: '#FFA500', marginTop: 2, fontStyle: 'italic' }, // orange course label
+  image: {
+    width: 70,
+    height: 70,
+    borderRadius: 8,
+    marginRight: 12,
+  },
+  textContainer: { flex: 1 },
+  name: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#000',
+  },
+  desc: {
+    fontSize: 13,
+    color: '#333',
+    marginVertical: 3,
+  },
+  price: {
+    fontWeight: '600',
+    color: '#000',
+  },
 });

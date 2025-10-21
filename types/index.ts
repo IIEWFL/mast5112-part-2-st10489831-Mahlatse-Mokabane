@@ -1,11 +1,12 @@
-export type Course = 'Starter' | 'Main' | 'Dessert' | 'Drinks' | 'Sides';
-
+import { ReactNode } from "react";
 export interface MenuItem {
+  desc: string;
   id: string;
   name: string;
   description: string;
-  course: Course;
-  price: string;
-  imageUri?: string;
-
+  course: string;
+  price: number;
+  image?: string;
 }
+
+export type Course = "Starter" | "Main" | "Dessert" | "Drink" | "Side";

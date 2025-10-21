@@ -1,50 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, ImageBackground } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { loadMenu } from '../utils/storage';
-import { MenuItem } from '../types';
-import MenuItemCard from '../components/MenuItemCard';
+import { MenuItem, Course } from '../types';
 import { courses } from '../data/courses';
-import { BlurView } from 'expo-blur';
+import MenuItemCard from '../components/MenuItemCard';
 
 export default function FilterScreen() {
   const [menu, setMenu] = useState<MenuItem[]>([]);
-  const [selectedCourse, setSelectedCourse] = useState(courses[0]);
+  const [filtered, setFiltered] = useState<MenuItem[]>([]);
+  const [selectedCourse, setSelectedCourse] = useState<Course>('Starter');
 
   useEffect(() => {
-    loadMenu().then(setMenu);
+    const fetchMenu = async () => {
+      const storedMenu = await loadMenu();
+      setMenu(storedMenu);
+    };
+    fetchMenu();
   }, []);
 
-  const filtered = menu.filter((item) => item.course === selectedCourse);
+  useEffect(() => {
+    setFiltered(menu.filter(item => item.course === selectedCourse));
+  }, [selectedCourse, menu]);
 
   return (
-    <ImageBackground source={require('../assets/background.jpg')} style={styles.bg}>
-      <BlurView intensity={25} style={styles.blurContainer}>
-        <Text style={styles.title}>Filter by Course</Text>
-        <View style={styles.pickerContainer}>
-          <Picker selectedValue={selectedCourse} onValueChange={setSelectedCourse} style={styles.picker}>
-            {courses.map((c) => (
-              <Picker.Item key={c} label={c} value={c} />
-            ))}
-          </Picker>
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.header}>Filter by Course</Text>
+
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={selectedCourse}
+          onValueChange={(value) => setSelectedCourse(value)}
+          style={styles.picker}
+        >
+          {courses.map((c) => (
+            <Picker.Item key={c} label={c} value={c} />
+          ))}
+        </Picker>
+      </View>
+
+      {filtered.length === 0 ? (
+        <Text style={styles.emptyText}>No dishes in this category.</Text>
+      ) : (
         <FlatList
           data={filtered}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <MenuItemCard item={item} />}
-          ListEmptyComponent={<Text style={styles.emptyText}>No dishes in this course.</Text>}
+          contentContainerStyle={{ paddingBottom: 20 }}
         />
-      </BlurView>
-    </ImageBackground>
+      )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  bg: { flex: 1, resizeMode: 'cover' },
-  overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.2)' },
-  blurContainer: { flex: 1, padding: 20 },
-  title: { fontSize: 22, fontWeight: 'bold', color: 'white', textAlign: 'center', marginBottom: 10 },
-  pickerContainer: { backgroundColor: 'white', borderRadius: 12, marginVertical: 8 },
+  container: { flex: 1, backgroundColor: '#F5F5DC', padding: 20 },
+  header: { fontSize: 22, fontWeight: 'bold', color: '#000', marginBottom: 10 },
+  pickerContainer: { backgroundColor: '#fff', borderRadius: 10, marginBottom: 15, overflow: 'hidden' },
   picker: { height: 50 },
-  emptyText: { color: 'white', textAlign: 'center', marginTop: 20 },
+  emptyText: { color: '#000', fontSize: 16, marginTop: 20, textAlign: 'center' },
 });

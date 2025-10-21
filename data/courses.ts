@@ -1,5 +1,1 @@
-import { Course } from '../types';
-
-export const courses: Course[] = ['Starter', 'Main', 'Dessert', 'Drinks', 'Sides'];
-
-
+export const courses = ["Starter", "Main", "Dessert", "Drink", "Side"];

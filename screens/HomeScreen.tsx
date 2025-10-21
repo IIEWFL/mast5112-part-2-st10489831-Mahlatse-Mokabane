@@ -1,52 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import MenuItemCard from '../components/MenuItemCard';
 import { loadMenu } from '../utils/storage';
 import { MenuItem } from '../types';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { BlurView } from 'expo-blur';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: any) {
   const [menu, setMenu] = useState<MenuItem[]>([]);
-  const navigation = useNavigation<any>();
-  const route = useRoute<any>();
-  const role = route.params?.role ?? 'guest';
 
   useEffect(() => {
-    loadMenu().then(setMenu);
-  }, []);
+    const fetchMenu = async () => {
+      const storedMenu = await loadMenu();
+      setMenu(storedMenu);
+    };
+    const focus = navigation.addListener('focus', fetchMenu);
+    return focus;
+  }, [navigation]);
 
   return (
-    <ImageBackground source={require('../assets/background.jpg')} style={styles.bg}>
-      <BlurView intensity={25} style={styles.blurContainer}>
-        <Text style={styles.title}>Today's Culinary Creations</Text>
-        <FlatList
-          data={menu}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <MenuItemCard item={item} />}
-          contentContainerStyle={{ paddingBottom: 20 }}
-        />
-        <View style={styles.buttons}>
-          {role === 'chef' && (
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddMenu', { role })}>
-              <Text style={styles.buttonText}>Add Menu Item</Text>
-            </TouchableOpacity>
-          )}
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Filter', { role })}>
-            <Text style={styles.buttonText}>Filter by Course</Text>
-          </TouchableOpacity>
-        </View>
-      </BlurView>
-    </ImageBackground>
+    <View style={styles.container}>
+      <Text style={styles.header}>Home</Text>
+      <Text style={styles.subHeader}>Today’s Culinary Creations</Text>
+      <Text style={styles.sub}>Culinary Options:</Text>
+
+      <FlatList
+        data={menu}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <MenuItemCard item={item} />}
+      />
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Filter')}
+      >
+        <Text style={styles.buttonText}>Filter by Course</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  bg: { flex: 1, resizeMode: 'cover' },
-  overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.2)' },
-  blurContainer: { flex: 1, padding: 20 },
-  title: { fontSize: 22, fontWeight: 'bold', color: 'white', textAlign: 'center', marginBottom: 10 },
-  buttons: { alignItems: 'center', marginTop: 10 },
-  button: { backgroundColor: '#2E1503', padding: 12, borderRadius: 25, marginVertical: 5, width: '70%' },
-  buttonText: { color: 'white', textAlign: 'center' },
+  container: { flex: 1, backgroundColor: '#F5F5DC', padding: 20 },
+  header: { fontSize: 28, fontWeight: 'bold', color: '#000' },
+  subHeader: { fontSize: 18, color: '#000', marginBottom: 6 },
+  sub: { color: '#000', marginBottom: 12 },
+  button: {
+    backgroundColor: '#000',
+    padding: 14,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  buttonText: { fontWeight: 'bold', color: '#fff' },
 });
