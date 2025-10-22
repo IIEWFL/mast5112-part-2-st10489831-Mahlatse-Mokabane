@@ -15,6 +15,7 @@ A React Native mobile application that lets users browse a restaurant's menu.  I
 The app is designed to be visually appealing, and user-friendly.
 
 <strong>Features</strong>
+
 <ul>
   <li>User authentication for Guest and Chef roles.</li>
   <li>Dynamic menu display (starters, sides, drinks, and main courses)</li>
