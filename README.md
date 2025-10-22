@@ -1,6 +1,6 @@
 <strong> Christoffel's Menu App</strong>
 
-<strong>Changes made from part 1:</strong>
+<strong>Changes made from part 1:</strong> 
 <ul>
   <li>I changed the image and background color.</li>
   <li>I aaded a chefloginScreen and a RoleSelectionScreen.</li>
