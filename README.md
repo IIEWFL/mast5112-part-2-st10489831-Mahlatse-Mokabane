@@ -1,5 +1,11 @@
 <strong> Christoffel's Menu App</strong>
 
+<strong>Changes made from part 1:</strong>
+<ul>
+  <li>I changed the image and background color.</li>
+  <li>I aaded a chefloginScreen and a RoleSelectionScreen.</li>
+</ul>
+
 <strong>Project Overview</strong>
 A React Native mobile application that lets users browse a restaurant's menu.  It is viewed from two angles:
 <ul>
