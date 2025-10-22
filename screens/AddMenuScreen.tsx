@@ -8,30 +8,34 @@ import { loadMenu, saveMenu } from '../utils/storage';
 import MenuItemCard from '../components/MenuItemCard';
 
 export default function AddMenuScreen() {
-  const [menu, setMenu] = useState<MenuItem[]>([]);
-
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-  const [course, setCourse] = useState<Course>('Starter');
-  const [price, setPrice] = useState('');
+   // Form state
+  const [menu, setMenu] = useState<MenuItem[]>([]); // Array of existing menu items
+  const [name, setName] = useState(''); // Name input field
+  const [desc, setDesc] = useState(''); // Description input field
+  const [course, setCourse] = useState<Course>('Starter'); // Selected course type
+  const [price, setPrice] = useState(''); // Price input field
 
   useEffect(() => {
     const fetchMenu = async () => {
-      const storedMenu = await loadMenu();
-      setMenu(storedMenu);
+      const storedMenu = await loadMenu(); // Load menu from AsyncStorage
+      setMenu(storedMenu); // Update state with stored menu
     };
     fetchMenu();
   }, []);
 
   const handleAdd = async () => {
-    const parsedPrice = parseFloat(price);
+    const parsedPrice = parseFloat(price); // Convert price string to number
+
+    // Validate that all fields are filled correctly
     if (!name || !desc || isNaN(parsedPrice)) {
       Alert.alert('Error', 'Please fill all fields correctly.');
       return;
     }
 
+    // Create new menu item object
     const newItem: MenuItem = {
-      id: uuid.v4().toString(),
+
+      id: uuid.v4().toString(), // Unique ID for each item
       name,
       desc,
       course,
@@ -39,10 +43,17 @@ export default function AddMenuScreen() {
       description: ''
     };
 
+
+     // Update menu array with new item
     const updatedMenu = [...menu, newItem];
+
+    // Save updated menu to AsyncStorage
     await saveMenu(updatedMenu);
+
+    // Update state to reflect changes
     setMenu(updatedMenu);
 
+    // Reset form inputs
     setName('');
     setDesc('');
     setPrice('');
@@ -50,6 +61,7 @@ export default function AddMenuScreen() {
   };
 
   const handleDelete = async (id: string) => {
+    // Filter out the item with matching ID
     const updatedMenu = menu.filter(item => item.id !== id);
     await saveMenu(updatedMenu);
     setMenu(updatedMenu);
@@ -57,17 +69,23 @@ export default function AddMenuScreen() {
 
   return (
     <View style={styles.container}>
+       {/* Screen title */}
       <Text style={styles.header}>Add Menu Item</Text>
 
+      {/* Name input */}
       <TextInput placeholder="Name" value={name} onChangeText={setName} style={styles.input} />
+
+       {/* Description input */}
       <TextInput placeholder="Description" value={desc} onChangeText={setDesc} style={styles.input} />
 
+       {/* Course Picker */}
       <View style={styles.pickerContainer}>
         <Picker selectedValue={course} onValueChange={(value) => setCourse(value as Course)} style={styles.picker}>
           {courses.map((c) => <Picker.Item key={c} label={c} value={c} />)}
         </Picker>
       </View>
 
+     
       <TextInput placeholder="Price" value={price} onChangeText={setPrice} keyboardType="numeric" style={styles.input} />
       <Pressable style={styles.addButton} onPress={handleAdd}>
         <Text style={styles.addButtonText}>Add Item</Text>

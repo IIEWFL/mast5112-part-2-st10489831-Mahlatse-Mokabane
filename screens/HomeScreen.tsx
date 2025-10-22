@@ -4,9 +4,23 @@ import MenuItemCard from '../components/MenuItemCard';
 import { loadMenu } from '../utils/storage';
 import { MenuItem } from '../types';
 
+/**
+ * This screen displays the restaurant’s current menu items
+ * to guests or chefs.
+ *
+ * Features:
+ * - Dynamically loads saved menu data from AsyncStorage.
+ * - Displays each dish using the reusable MenuItemCard component.
+ * - Provides navigation to a filtering screen for course-based browsing.
+ */
 export default function HomeScreen({ navigation }: any) {
   const [menu, setMenu] = useState<MenuItem[]>([]);
 
+  /**
+   * Load menu data when the screen is focused.
+   * Ensures that the list updates automatically when
+   * returning from the Add Menu or Filter screens.
+   */
   useEffect(() => {
     const fetchMenu = async () => {
       const storedMenu = await loadMenu();
@@ -22,12 +36,14 @@ export default function HomeScreen({ navigation }: any) {
       <Text style={styles.subHeader}>Today’s Culinary Creations</Text>
       <Text style={styles.sub}>Culinary Options:</Text>
 
+     {/* Menu list section */}
       <FlatList
         data={menu}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <MenuItemCard item={item} />}
       />
 
+       {/* Button to navigate to Filter screen */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Filter')}

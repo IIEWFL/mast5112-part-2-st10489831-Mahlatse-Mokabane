@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import RoleSelectionScreen from "./screens/RoleSelectionScreen";
-import ChefPinScreen from "./screens/PinScreen";
+import ChefPinScreen from "./screens/ChefLoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import AddMenuScreen from "./screens/AddMenuScreen";
 import FilterScreen from "./screens/FilterScreen";

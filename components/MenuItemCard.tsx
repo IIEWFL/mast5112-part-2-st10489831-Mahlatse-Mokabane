@@ -5,9 +5,7 @@ import { MenuItem } from '../types';
 export default function MenuItemCard({ item }: { item: MenuItem }) {
   return (
     <View style={styles.card}>
-      {item.image && (
-        <Image source={{ uri: item.image }} style={styles.image} />
-      )}
+      {/* Text details for the dish (name, description, price) */}
       <View style={styles.textContainer}>
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.desc}>{item.desc}</Text>
