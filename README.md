@@ -13,7 +13,7 @@ The app is designed to be visually appealing, and user-friendly.
   <li>User authentication for Guest and Chef roles.</li>
   <li>Dynamic menu display (starters, sides, drinks, and main courses)</li>
   <li><strong>Chef can:</strong> </li>
-  <li>Add new menu items with images.</li>
+  <li>Add new menu items.</li>
   <li>Edit existing items.</li>
   <li>Remove menu items.</li>
 
