@@ -21,5 +21,5 @@ A React Native mobile application that lets users browse a restaurant's menu.  I
 </ul>
 <strong>Refrences</strong>
 
-Freepik Chef holding metal food platter [Image]. Freepik. Available at: https://img.freepik.com/premium-vector/chef-holding-metal-food-platter_29190-122.jpg?w=900 [Accessed: 20 October 2025].
+Chef holding metal food platter [Image]. Freepik. Available at: https://img.freepik.com/premium-vector/chef-holding-metal-food-platter_29190-122.jpg?w=900 [Accessed: 20 October 2025].
 
