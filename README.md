@@ -13,7 +13,7 @@ A React Native mobile application that lets users browse a restaurant's menu.  I
   <li><strong>Chef: </strong> Can manage manage the menu such as add, edit and remove items.</li>
 </ul>
 The app is designed to be visually appealing, and user-friendly.
-
+<br>
 <strong>Features</strong>
 
 <ul>
