@@ -20,5 +20,6 @@ A React Native mobile application that lets users browse a restaurant's menu.  I
   <li>Dynamic menu display (starters, sides, drinks, and main courses)</li>
 </ul>
 <strong>Refrences</strong>
-Freepik (n.d.) *Chef holding metal food platter* [Image]. Freepik. Available at: https://img.freepik.com/premium-vector/chef-holding-metal-food-platter_29190-122.jpg?w=900 [Accessed: 20 October 2025].
+
+Freepik Chef holding metal food platter [Image]. Freepik. Available at: https://img.freepik.com/premium-vector/chef-holding-metal-food-platter_29190-122.jpg?w=900 [Accessed: 20 October 2025].
 
